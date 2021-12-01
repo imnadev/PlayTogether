@@ -9,9 +9,8 @@ struct User {
     int id;
     char name[50];
     char password[50];
-    char ip[15];
-    int port;
-    bool approved;
+    char address[21];
+    int server_id;
 };
 
 #endif
