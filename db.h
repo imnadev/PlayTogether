@@ -3,7 +3,7 @@
 
 #include "structs.h"
 
-void connect_to_database();
+void init_database();
 
 void insert_user(User *user);
 

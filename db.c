@@ -1,6 +1,6 @@
 #include "db.h"
 
-void connect_to_database() {
+void init_database() {
 
 }
 
