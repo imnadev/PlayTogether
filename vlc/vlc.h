@@ -3,10 +3,6 @@
 
 #include <stdbool.h>
 
-void vlc_is_available(void (*vlc_is_available_callback(bool))); // Check if vlc is available and send result to callback
-
-void vlc_is_open(void (*vlc_is_open_callback(bool))); // Check if vlc is open and send result to callback
-
 void vlc_play();
 
 void vlc_pause();

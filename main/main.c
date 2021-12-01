@@ -5,6 +5,6 @@ int main(int argc, char *argv[]) {
 
     gtk_init(&argc, &argv);
 
-    show_setup_window();
+    setup_window_show();
     return 0;
 }

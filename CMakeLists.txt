@@ -9,11 +9,10 @@ add_executable(PlayTogether
         main/main.c
         database/database.c database/database.h
         struct/user.h
-        socket/server/server_socket.c socket/server/server_socket.h
+        socket/server/server.c socket/server/server.h
         screen/setup/setup_window.c screen/setup/setup_window.h
-        screen/server/server_window.c screen/server/server_window.h
-        screen/client/client_window.c screen/client/client_window.h
-        socket/client/client_socket.c socket/client/client_socket.h
+        screen/main/main_window.c screen/main/main_window.h
+        socket/client/client.c socket/client/client.h
         vlc/vlc.c vlc/vlc.h)
 
 find_package(PkgConfig REQUIRED)
