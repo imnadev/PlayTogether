@@ -1,12 +1,7 @@
 #include <gtk/gtk.h>
-#include "setup_window.h"
-#include "db.h"
-#include "socket.h"
+#include "../screen/setup/setup_window.h"
 
 int main(int argc, char *argv[]) {
-
-    init_database();
-    init_socket();
 
     gtk_init(&argc, &argv);
 

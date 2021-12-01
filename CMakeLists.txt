@@ -3,7 +3,16 @@ project(PlayTogether C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(PlayTogether main.c db.c db.h structs.h socket.c socket.h setup_window.c setup_window.h server_window.c server_window.h client_window.c client_window.h)
+add_executable(PlayTogether
+        main/main.c
+        database/database.c database/database.h
+        struct/user.h
+        socket/server/server_socket.c socket/server/server_socket.h
+        screen/setup/setup_window.c screen/setup/setup_window.h
+        screen/server/server_window.c screen/server/server_window.h
+        screen/client/client_window.c screen/client/client_window.h
+        socket/client/client_socket.c socket/client/client_socket.h
+        vlc/vlc.c vlc/vlc.h)
 
 find_package(PkgConfig REQUIRED)
 

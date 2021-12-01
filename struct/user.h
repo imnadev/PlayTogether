@@ -1,5 +1,5 @@
-#ifndef PLAYTOGETHER_STRUCTS_H
-#define PLAYTOGETHER_STRUCTS_H
+#ifndef PLAYTOGETHER_USER_H
+#define PLAYTOGETHER_USER_H
 
 #include <stdbool.h>
 
