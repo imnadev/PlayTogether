@@ -2,7 +2,7 @@
 #include <gtk/gtk.h>
 
 void show_setup_window() {
-    GtkBuilder *builder = gtk_builder_new_from_file("screen/setup/setup_window.glade");
+    GtkBuilder *builder = gtk_builder_new_from_file("../screen/setup/setup_window.glade");
     GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(builder, "setup_window"));
     gtk_builder_connect_signals(builder, NULL);
 
