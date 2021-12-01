@@ -1,0 +1,4 @@
+#ifndef PLAYTOGETHER_SOCKET_H
+#define PLAYTOGETHER_SOCKET_H
+
+#endif
