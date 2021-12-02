@@ -7,6 +7,6 @@ void database_init();
 
 void database_insert_user(User *user);
 
-void database_get_users(void (*database_get_users_callback(User *)));
+User* database_get_users(int server_id);
 
 #endif

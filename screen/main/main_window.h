@@ -2,8 +2,8 @@
 #define PLAYTOGETHER_CLIENT_WINDOW_H
 
 
-int SERVER_WINDOW = 0;
-int CLIENT_WINDOW = 1;
+#define SERVER_WINDOW 0;
+#define CLIENT_WINDOW 1;
 
 /*
  * Called from setup_window with above SERVER_WINDOW and CLIENT_WINDOW values as type

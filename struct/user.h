@@ -7,9 +7,16 @@ typedef struct User User;
 
 struct User {
     int id;
-    char name[50];
-    char password[50];
-    char address[21];
+
+    char *name;
+    int name_length;
+
+    char *password;
+    int password_length;
+
+    char *address;
+    int address_length;
+
     int server_id;
 };
 
