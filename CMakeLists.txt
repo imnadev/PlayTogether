@@ -13,7 +13,7 @@ add_executable(PlayTogether
         screen/setup/setup_window.c screen/setup/setup_window.h
         screen/main/main_window.c screen/main/main_window.h
         socket/client/client.c socket/client/client.h
-        vlc/vlc.c vlc/vlc.h)
+        vlc/vlc.c vlc/vlc.h struct/constants.h)
 
 find_package(PkgConfig REQUIRED)
 

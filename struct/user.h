@@ -9,13 +9,10 @@ struct User {
     int id;
 
     char *name;
-    int name_length;
 
     char *password;
-    int password_length;
 
     char *address;
-    int address_length;
 
     int server_id;
 };

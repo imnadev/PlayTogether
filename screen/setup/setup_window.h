@@ -28,5 +28,6 @@ void setup_window_on_connect();
  */
 void setup_window_error(char* message, int length);
 
+void server_init_status_callback(int status);
 
 #endif
