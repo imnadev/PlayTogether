@@ -12,4 +12,6 @@ void server_sync();
 
 void server_action(char *action);   //PLAY, PAUSE, SEEK_FORWARD, SEEK_BACKWARD
 
+void server_stop();
+
 #endif

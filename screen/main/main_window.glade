@@ -8,6 +8,11 @@
     <property name="stock">gtk-quit</property>
     <property name="icon_size">3</property>
   </object>
+  <object class="GtkImage" id="image12">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-quit</property>
+  </object>
   <object class="GtkImage" id="image2">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -33,12 +38,12 @@
     <property name="can-focus">False</property>
     <property name="stock">gtk-refresh</property>
   </object>
-  <object class="GtkWindow" id="main_window">
+  <object class="GtkWindow" id="server_window">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Connected to 192.168.0.150:8080</property>
+    <property name="title" translatable="yes">Serving at 192.168.0.150:8080</property>
     <property name="resizable">False</property>
     <property name="icon-name">template_app</property>
-    <signal name="destroy" handler="on_window_setup_destroy" swapped="no"/>
+    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
     <child>
       <!-- n-columns=6 n-rows=1 -->
       <object class="GtkGrid">
@@ -57,6 +62,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="image">image1</property>
+            <signal name="clicked" handler="main_window_on_exit_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">0</property>
@@ -82,6 +88,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="image">image3</property>
+            <signal name="clicked" handler="main_window_on_pause_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">2</property>
@@ -94,6 +101,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="image">image4</property>
+            <signal name="clicked" handler="main_window_on_seek_backward_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">3</property>
@@ -106,6 +114,7 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="image">image5</property>
+            <signal name="clicked" handler="main_window_on_seek_forward_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">4</property>
@@ -118,9 +127,61 @@
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="image">image6</property>
+            <signal name="clicked" handler="main_window_on_sync_clicked" swapped="no"/>
           </object>
           <packing>
             <property name="left-attach">5</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkImage" id="image7">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <property name="stock">gtk-refresh</property>
+    <property name="icon_size">3</property>
+  </object>
+  <object class="GtkWindow" id="client_window">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Connected to 192.168.0.150:8080</property>
+    <property name="resizable">False</property>
+    <property name="icon-name">template_app</property>
+    <child>
+      <!-- n-columns=2 n-rows=1 -->
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="halign">center</property>
+        <property name="margin-left">16</property>
+        <property name="margin-right">16</property>
+        <property name="margin-top">16</property>
+        <property name="margin-bottom">16</property>
+        <property name="column-spacing">16</property>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="image">image7</property>
+            <signal name="clicked" handler="main_window_on_sync_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="image">image12</property>
+            <signal name="clicked" handler="main_window_on_exit_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
             <property name="top-attach">0</property>
           </packing>
         </child>

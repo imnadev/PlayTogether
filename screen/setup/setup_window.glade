@@ -16,6 +16,7 @@
         <property name="margin-right">16</property>
         <property name="margin-top">16</property>
         <property name="margin-bottom">16</property>
+        <property name="row-spacing">16</property>
         <child>
           <object class="GtkButton">
             <property name="label" translatable="yes">SERVE</property>
@@ -31,7 +32,17 @@
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">CONNECT</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <signal name="clicked" handler="setup_window_on_connect_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
         </child>
         <child>
           <placeholder/>

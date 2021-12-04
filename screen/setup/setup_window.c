@@ -2,6 +2,7 @@
 #include <gtk/gtk.h>
 #include "../../socket/server/server.h"
 #include "../main/main_window.h"
+#include "../../socket/client/client.h"
 #include <pthread.h>
 
 GtkWidget *setup_window;
@@ -24,6 +25,17 @@ void setup_window_on_serve_clicked() {
     } else {
         gtk_widget_hide(setup_window);
         main_window_show(SERVER_WINDOW);
+    }
+}
+
+void setup_window_on_connect_clicked() {
+    //TODO get ip and port from screen
+    if (client_init("127.0.0.1", 8888) == FAILURE) {
+        //TODO show error main_window
+        gtk_main_quit();
+    } else {
+        gtk_widget_hide(setup_window);
+        main_window_show(CLIENT_WINDOW);
     }
 }
 

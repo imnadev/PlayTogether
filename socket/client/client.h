@@ -2,14 +2,17 @@
 #define PLAYTOGETHER_CLIENT_H
 
 #include "../../struct/user.h"
+#include "../../struct/constants.h"
 
-void client_init(
+int client_init(
         char *ip,
-        char *port
+        int port
 );
 
 void client_get_users(void (*set_users(User *)));
 
 void client_sync();
+
+void client_stop();
 
 #endif
