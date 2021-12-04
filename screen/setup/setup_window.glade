@@ -5,12 +5,38 @@
   <object class="GtkWindow" id="setup_window">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Play Together Setup</property>
-    <property name="default-width">640</property>
-    <property name="default-height">480</property>
     <property name="icon-name">template_app</property>
     <signal name="destroy" handler="on_window_setup_destroy" swapped="no"/>
     <child>
-      <placeholder/>
+      <!-- n-columns=1 n-rows=3 -->
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-left">16</property>
+        <property name="margin-right">16</property>
+        <property name="margin-top">16</property>
+        <property name="margin-bottom">16</property>
+        <child>
+          <object class="GtkButton">
+            <property name="label" translatable="yes">SERVE</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="hexpand">True</property>
+            <signal name="clicked" handler="setup_window_on_serve_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
     </child>
   </object>
 </interface>

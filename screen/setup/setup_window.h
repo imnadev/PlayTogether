@@ -2,7 +2,7 @@
 #define PLAYTOGETHER_SETUP_WINDOW_H
 
 /*
- * Called from main(), just opens the setup window.
+ * Called from main(), just opens the setup main_window.
  * Writes server ip and port number on screen
  */
 void setup_window_show();
@@ -12,7 +12,7 @@ void setup_window_show();
  * Inits server.h with user details
  * Opens main_window as server on success
  */
-void setup_window_on_serve();
+void setup_window_on_serve_clicked();
 
 /*
  * Called from glade when connect button clicked.
@@ -20,7 +20,7 @@ void setup_window_on_serve();
  * Sends user details to server
  * Opens main_window as client on success
  */
-void setup_window_on_connect();
+void setup_window_on_connect_clicked();
 
 /*
  * Called from the same setup_window when any error occurs

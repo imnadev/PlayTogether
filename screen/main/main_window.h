@@ -2,14 +2,14 @@
 #define PLAYTOGETHER_CLIENT_WINDOW_H
 
 
-#define SERVER_WINDOW 0;
-#define CLIENT_WINDOW 1;
+#define SERVER_WINDOW 0
+#define CLIENT_WINDOW 1
 
 /*
  * Called from setup_window with above SERVER_WINDOW and CLIENT_WINDOW values as type
- * Draws the window according to the type
+ * Draws the main_window according to the type
  * Gets users list from server.h or client.h
- * Sets window text as 'Connected to'/'Serving at' 192.168.0.123:8080
+ * Sets main_window text as 'Connected to'/'Serving at' 192.168.0.123:8080
  */
 void main_window_show(int type);
 

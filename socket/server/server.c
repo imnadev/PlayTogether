@@ -1,5 +1,4 @@
 #include "server.h"
-#include "../../database/database.h"
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -18,6 +17,16 @@ struct sockaddr_in address;
 char buffer[1025];
 fd_set readfds;
 char *message = "ECHO Daemon v1.0 \r\n";
+
+void server_action(char *action) {
+    for (i = 0; i < max_clients; i++) {
+        if (client_socket[i] != 0) {
+            if (send(client_socket[i], action, strlen(action), 0) != strlen(action)) {
+                perror("send");
+            }
+        }
+    }
+}
 
 _Noreturn void *listen_to_connections(void *) {
     while (TRUE) {
@@ -99,11 +108,7 @@ _Noreturn void *listen_to_connections(void *) {
     }
 }
 
-int server_init(User *user) {
-    if (database_insert_user(user) == FAILURE) {     //Insert user
-        return FAILURE;
-    }
-
+int server_init() {
     for (i = 0; i < max_clients; i++) {     //initialise all client_socket[] to 0 so not checked
         client_socket[i] = 0;
     }
@@ -117,7 +122,8 @@ int server_init(User *user) {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(PORT);
 
-    if (bind(master_socket, (struct sockaddr *) &address, sizeof(address)) < 0) {   //bind the socket to localhost port 8888
+    if (bind(master_socket, (struct sockaddr *) &address, sizeof(address)) <
+        0) {   //bind theSEEK_BACKWARD socket to localhost port 8888
         perror("bind failed");
         return FAILURE;
     }

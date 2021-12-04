@@ -8,4 +8,14 @@
 #define LOADING 0
 #define FAILURE -1
 
+
+//ACTIONS
+#define PLAY "ACTION_PLAY\r\n"
+#define PAUSE "ACTION_PAUSE\r\n"
+#define SEEK_FORWARD "ACTION_SEEK_FORWARD\r\n"
+#define SEEK_BACKWARD "ACTION_SEEK_BACKWARD\r\n"
+
+#define GET_SEEK "4"
+#define SET_SEEK "5"
+
 #endif
