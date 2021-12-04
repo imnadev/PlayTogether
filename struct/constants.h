@@ -16,7 +16,7 @@
 #define SEEK_BACKWARD "ACTION_SEEK_BACKWARD\r\n"
 #define SERVER_STOP "ACTION_SERVER_STOP\r\n"
 
-#define GET_SEEK "4"
-#define SET_SEEK "5"
+#define GET_SEEK "GET_SEEK"
+#define SET_SEEK "SET_SEEK"
 
 #endif
