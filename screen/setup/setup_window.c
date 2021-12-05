@@ -9,6 +9,7 @@
 GtkWidget *setup_window;
 GtkWidget *entry1;
 GtkWidget *label1;
+char tmp[16];
 
 void setup_window_show() {
     GtkBuilder *builder = gtk_builder_new_from_file("../screen/setup/setup_window.glade");
@@ -46,10 +47,9 @@ void setup_window_on_connect_clicked() {
     }
 }
 
-void get_text(GtkEntry *e){
-	char tmp[16];
-	sprintf(tmp, "entry:%s", gtk_entry_get_text(e));
-	gtk_label_set_text(GTK_LABEL(label1), (const gchar*) tmp);
+void get_text(GtkEntry *e) {
+    sprintf(tmp, gtk_entry_get_text(e));
+    gtk_label_set_text(GTK_LABEL(label1), (const gchar *) tmp);
 }
 
 void on_window_setup_destroy() {
