@@ -10,7 +10,7 @@
 #include <pthread.h>
 #include "../../vlc/vlc.h"
 
-#define PORT 8877
+int server_port = 8877;
 
 int master_socket, addrlen, new_socket, client_socket[30], max_clients = 30, activity, i, valread, sd, max_sd;
 struct sockaddr_in address;
@@ -87,28 +87,17 @@ _Noreturn void *listen_to_connections(void *) {
             sd = client_socket[i];
 
             if (FD_ISSET(sd, &readfds)) {
-                if ((valread = read(sd, buffer, 1024)) == 0) {
+                if ((valread = read(sd, buffer, 1024)) >= 0) {
 
-                    if (strncmp(buffer, SYNC, sizeof(SYNC)) == 0) {
-                        int position = vlc_get_seek_position();
+                    int position = vlc_get_seek_position();
 
-                        char message[50] = {0};
-                        sprintf(message, "seek %d\r\n", position);
+                    char message[50] = {0};
+                    sprintf(message, "seek %d\r\n", position);
 
-                        if (send(sd, message, strlen(message), 0) != strlen(message)) {
-                            perror("send");
-                        }
-                    } else {
-                        getpeername(sd, (struct sockaddr *) &address, (socklen_t *) addrlen);
-
-                        printf("Host disconnected, ip %s, port %d \n",
-                               inet_ntoa((address).sin_addr),
-                               ntohs((address).sin_port)
-                        );
-
-                        close(sd);
-                        client_socket[i] = 0;
+                    if (send(sd, message, strlen(message), 0) != strlen(message)) {
+                        perror("send");
                     }
+
                 }
 
             }
@@ -126,14 +115,21 @@ int server_init() {
             perror("create");
             return FAILURE;
         }
-
         address.sin_family = AF_INET;
         address.sin_addr.s_addr = INADDR_ANY;
-        address.sin_port = htons(PORT);
+
+        int tries = 0;
+        a:
+        address.sin_port = htons(server_port);
 
         if (bind(master_socket, (struct sockaddr *) &address, sizeof(address)) < 0) {
             perror("bind");
-            return FAILURE;
+            if (tries > 20) {
+                return FAILURE;
+            }
+            tries++;
+            server_port++;
+            goto a;
         }
 
         if (listen(master_socket, 3) < 0) {
