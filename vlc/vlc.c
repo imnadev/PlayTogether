@@ -14,8 +14,16 @@ char vlc_buffer[1024] = {0};
 
 #define VLC_PORT 9988
 
-void * vlc_connect() {
-    printf("connecting");
+char *vlc_read() {
+    for (int i = 0; i < 1024; i++) {
+        vlc_buffer[i] = 0;
+    }
+    read(vlc_socket, vlc_buffer, 1024);
+    printf("%s", vlc_buffer);
+    return vlc_buffer;
+}
+
+void *vlc_connect() {
     if ((vlc_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("create");
     }
@@ -30,18 +38,21 @@ void * vlc_connect() {
     if (connect(vlc_socket, (struct sockaddr *) &vlc_addr, sizeof(vlc_addr)) < 0) {
         perror("connect");
     }
-    printf("connected");
+
+    vlc_read();
+    vlc_read();
 }
 
-void vlc_send(char * message) {
+void vlc_send(char *message) {
     printf("vlc_send: %s", message);
-    if(send(vlc_socket, message, strlen(message), 0) != strlen(message)) {
+    if (send(vlc_socket, message, strlen(message), 0) != strlen(message)) {
         perror("send");
     };
+    vlc_read();
 }
 
-void vlc_action(char * action) {
-    char *message;
+void vlc_action(char *action) {
+    char message[100] = {0};
     if (strncmp(action, SEEK_FORWARD, sizeof(SEEK_FORWARD)) == 0) {
         int position = vlc_get_seek_position() + 10;
         sprintf(message, "seek %d\r\n", position);
@@ -49,16 +60,17 @@ void vlc_action(char * action) {
         int position = vlc_get_seek_position() - 10;
         sprintf(message, "seek %d\r\n", position);
     } else {
-        message = action;
+        sprintf(message, "%s\r\n", action);
     }
-    vlc_send(action);
+    vlc_send(message);
 }
 
 int vlc_get_seek_position() {
-    vlc_action("get_time\r\n");
-    read(vlc_socket, vlc_buffer, 1024);
-    printf("time: %s", vlc_buffer);
-    return atoi(vlc_buffer);
+    char *message = "get_time\r\n";
+    if (send(vlc_socket, message, strlen(message), 0) != strlen(message)) {
+        perror("send");
+    };
+    return atoi(vlc_read());
 }
 
 void vlc_stop() {
