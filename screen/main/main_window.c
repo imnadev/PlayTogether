@@ -6,8 +6,12 @@
 #include "../../socket/client/client.h"
 
 GtkWidget *main_window;
+int window_type;
 
 void main_window_show(int type) {
+
+    window_type = type;
+
     GtkBuilder *builder = gtk_builder_new_from_file("../screen/main/main_window.glade");
 
     if (type == SERVER_WINDOW) {
@@ -27,7 +31,11 @@ void main_window_on_play_clicked() {
 }
 
 void main_window_on_sync_clicked() {
-
+    if (window_type == SERVER_WINDOW) {
+        server_action(SYNC);
+    } else {
+        client_sync();
+    }
 }
 
 void main_window_on_pause_clicked() {

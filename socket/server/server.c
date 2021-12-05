@@ -8,8 +8,9 @@
 #include <netinet/in.h>
 #include <sys/time.h>
 #include <pthread.h>
+#include "../../vlc/vlc.h"
 
-#define PORT 8888
+#define PORT 8877
 
 int master_socket, addrlen, new_socket, client_socket[30], max_clients = 30, activity, i, valread, sd, max_sd;
 struct sockaddr_in address;
@@ -18,9 +19,24 @@ fd_set readfds;
 int listening = FALSE;
 
 void server_action(char *action) {
+    char *message;
+
+    if (strncmp(action, SYNC, sizeof(SYNC)) == 0) {
+        int position = vlc_get_seek_position();
+        sprintf(message, "seek %d\r\n", position);
+    } else if (strncmp(action, SEEK_FORWARD, sizeof(SEEK_FORWARD)) == 0) {
+        int position = vlc_get_seek_position() + 10;
+        sprintf(message, "seek %d\r\n", position);
+    } else if (strncmp(action, SEEK_BACKWARD, sizeof(SEEK_BACKWARD)) == 0) {
+        int position = vlc_get_seek_position() - 10;
+        sprintf(message, "seek %d\r\n", position);
+    } else {
+        message = action;
+    }
+
     for (i = 0; i < max_clients; i++) {
         if (client_socket[i] != 0) {
-            if (send(client_socket[i], action, strlen(action), 0) != strlen(action)) {
+            if (send(client_socket[i], message, strlen(message), 0) != strlen(message)) {
                 perror("send");
             }
         }
@@ -67,16 +83,28 @@ _Noreturn void *listen_to_connections(void *) {
             if (FD_ISSET(sd, &readfds)) {
                 if ((valread = read(sd, buffer, 1024)) == 0) {
 
-                    getpeername(sd, (struct sockaddr *) &address, (socklen_t *) addrlen);
+                    if (strncmp(buffer, SYNC, sizeof(SYNC)) == 0) {
+                        int position = vlc_get_seek_position();
 
-                    printf("Host disconnected, ip %s, port %d \n",
-                           inet_ntoa((address).sin_addr),
-                           ntohs((address).sin_port)
-                    );
+                        char *message;
+                        sprintf(message, "seek %d\r\n", position);
 
-                    close(sd);
-                    client_socket[i] = 0;
+                        if (send(sd, message, strlen(message), 0) != strlen(message)) {
+                            perror("send");
+                        }
+                    } else {
+                        getpeername(sd, (struct sockaddr *) &address, (socklen_t *) addrlen);
+
+                        printf("Host disconnected, ip %s, port %d \n",
+                               inet_ntoa((address).sin_addr),
+                               ntohs((address).sin_port)
+                        );
+
+                        close(sd);
+                        client_socket[i] = 0;
+                    }
                 }
+
             }
         }
     }

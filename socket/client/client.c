@@ -11,40 +11,31 @@
 #include "../../vlc/vlc.h"
 #include "../../screen/main/main_window.h"
 
-int sock = 0, client_read;
+int sock = 0;
 struct sockaddr_in serv_addr;
 char client_buffer[1024] = {0};
 
 int client_listening = FALSE;
 
+void client_sync() {
+    char *message;
+    sprintf(message, "%s\r\n", SYNC);
+    if (send(sock, message, strlen(message), 0) != strlen(message)) {
+        perror("send");
+    }
+}
+
 _Noreturn void *listen_to_server(void *) {
     while (client_listening) {
         memset(client_buffer, 0, sizeof(client_buffer));
-        client_read = read(sock, client_buffer, 1024);
 
-        if (strncmp(client_buffer, PLAY, sizeof(PLAY)) == 0) {
-            vlc_action(PLAY);
-        }
-
-        if (strncmp(client_buffer, PAUSE, sizeof(PAUSE)) == 0) {
-            vlc_action(PAUSE);
-        }
-
-        if (strncmp(client_buffer, SEEK_FORWARD, sizeof(SEEK_FORWARD)) == 0) {
-            vlc_action(SEEK_FORWARD);
-        }
-
-        if (strncmp(client_buffer, SEEK_BACKWARD, sizeof(SEEK_BACKWARD)) == 0) {
-            vlc_action(SEEK_BACKWARD);
-        }
-
-        if (strncmp(client_buffer, SET_SEEK, strlen(SET_SEEK)) == 0) {
-            vlc_set_seek_position(atoi(client_buffer));
-        }
+        read(sock, client_buffer, 1024);
 
         if (strncmp(client_buffer, SERVER_STOP, sizeof(SERVER_STOP)) == 0) {
             main_window_on_exit_clicked();
             client_listening = FALSE;
+        } else {
+            vlc_send(client_buffer);
         }
     }
 }
@@ -54,7 +45,6 @@ int client_init(char *ip, int port) {
         return FAILURE;
     }
 
-    memset(&serv_addr, '0', sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
 

@@ -10,13 +10,14 @@
 
 
 //ACTIONS
-#define PLAY "ACTION_PLAY\r\n"
-#define PAUSE "ACTION_PAUSE\r\n"
-#define SEEK_FORWARD "ACTION_SEEK_FORWARD\r\n"
-#define SEEK_BACKWARD "ACTION_SEEK_BACKWARD\r\n"
-#define SERVER_STOP "ACTION_SERVER_STOP\r\n"
+#define PLAY "play"
+#define PAUSE "pause"
+#define SEEK_FORWARD "seek_forward"
+#define SEEK_BACKWARD "seek_backward"
+#define SERVER_STOP "server_stop"
 
-#define GET_SEEK "GET_SEEK"
-#define SET_SEEK "SET_SEEK"
+#define SET_SEEK "seek"
+
+#define SYNC "sync"
 
 #endif
