@@ -19,7 +19,7 @@ fd_set readfds;
 int listening = FALSE;
 
 void server_action(char *action) {
-    char *message;
+    char message[100] = {0};
 
     if (strncmp(action, SYNC, sizeof(SYNC)) == 0) {
         int position = vlc_get_seek_position();
@@ -31,7 +31,7 @@ void server_action(char *action) {
         int position = vlc_get_seek_position() - 10;
         sprintf(message, "seek %d\r\n", position);
     } else {
-        message = action;
+        sprintf(message, "%s/r/n", action);
     }
 
     for (i = 0; i < max_clients; i++) {
