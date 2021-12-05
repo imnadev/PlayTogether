@@ -92,7 +92,7 @@ _Noreturn void *listen_to_connections(void *) {
                     if (strncmp(buffer, SYNC, sizeof(SYNC)) == 0) {
                         int position = vlc_get_seek_position();
 
-                        char *message;
+                        char message[50] = {0};
                         sprintf(message, "seek %d\r\n", position);
 
                         if (send(sd, message, strlen(message), 0) != strlen(message)) {

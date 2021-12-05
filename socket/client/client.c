@@ -18,7 +18,7 @@ char client_buffer[1024] = {0};
 int client_listening = FALSE;
 
 void client_sync() {
-    char *message;
+    char message[50] = {0};
     sprintf(message, "%s\r\n", SYNC);
     if (send(sock, message, strlen(message), 0) != strlen(message)) {
         perror("send");
