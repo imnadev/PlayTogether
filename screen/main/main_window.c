@@ -45,12 +45,10 @@ void main_window_on_pause_clicked() {
 
 void main_window_on_seek_backward_clicked() {
     server_action(SEEK_BACKWARD);
-    vlc_action(SEEK_BACKWARD);
 }
 
 void main_window_on_seek_forward_clicked() {
     server_action(SEEK_FORWARD);
-    vlc_action(SEEK_FORWARD);
 }
 
 void main_window_on_exit_clicked() {

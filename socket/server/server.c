@@ -24,12 +24,18 @@ void server_action(char *action) {
     if (strncmp(action, SYNC, sizeof(SYNC)) == 0) {
         int position = vlc_get_seek_position();
         sprintf(message, "seek %d\r\n", position);
+        vlc_send(message);
     } else if (strncmp(action, SEEK_FORWARD, sizeof(SEEK_FORWARD)) == 0) {
         int position = vlc_get_seek_position() + 10;
         sprintf(message, "seek %d\r\n", position);
+        vlc_send(message);
     } else if (strncmp(action, SEEK_BACKWARD, sizeof(SEEK_BACKWARD)) == 0) {
         int position = vlc_get_seek_position() - 10;
+        if (position < 0) {
+            position = 0;
+        }
         sprintf(message, "seek %d\r\n", position);
+        vlc_send(message);
     } else {
         sprintf(message, "%s\r\n", action);
     }

@@ -19,7 +19,7 @@ char *vlc_read() {
         vlc_buffer[i] = 0;
     }
     read(vlc_socket, vlc_buffer, 1024);
-    printf("%s", vlc_buffer);
+    printf("vlc_read: %s\n", vlc_buffer);
     return vlc_buffer;
 }
 
@@ -53,16 +53,19 @@ void vlc_send(char *message) {
 
 void vlc_action(char *action) {
     char message[100] = {0};
-    if (strncmp(action, SEEK_FORWARD, sizeof(SEEK_FORWARD)) == 0) {
-        int position = vlc_get_seek_position() + 10;
-        sprintf(message, "seek %d\r\n", position);
-    } else if (strncmp(action, SEEK_BACKWARD, sizeof(SEEK_BACKWARD)) == 0) {
-        int position = vlc_get_seek_position() - 10;
-        sprintf(message, "seek %d\r\n", position);
-    } else {
-        sprintf(message, "%s\r\n", action);
-    }
+    sprintf(message, "%s\r\n", action);
     vlc_send(message);
+}
+
+#include <ctype.h>
+
+int contains_digit(const char *s)
+{
+    while (*s) {
+        if (isdigit(*s++) != 0) return 1;
+    }
+
+    return 0;
 }
 
 int vlc_get_seek_position() {
@@ -70,7 +73,14 @@ int vlc_get_seek_position() {
     if (send(vlc_socket, message, strlen(message), 0) != strlen(message)) {
         perror("send");
     };
-    return atoi(vlc_read());
+
+    char *read;
+    do {
+        read = vlc_read();
+    } while (contains_digit(read) != 1);
+
+    int position = atoi(read);
+    return position;
 }
 
 void vlc_stop() {
