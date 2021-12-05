@@ -57,7 +57,6 @@
             <property name="margin_left">16</property>
             <property name="margin_right">16</property>
             <property name="placeholder_text" translatable="yes">ip_address</property>
-            <signal name="changed" handler="get_text" swapped="no"/>
           </object>
           <packing>
             <property name="left_attach">0</property>
