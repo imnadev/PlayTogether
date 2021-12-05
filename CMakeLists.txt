@@ -4,6 +4,7 @@ project(PlayTogether C)
 set(CMAKE_C_STANDARD 99)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -rdynamic")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
 
 add_executable(PlayTogether
         main/main.c

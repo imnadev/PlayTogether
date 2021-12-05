@@ -38,7 +38,7 @@ void setup_window_on_serve_clicked() {
 void setup_window_on_connect_clicked() {
     vlc_connect();
     //TODO get ip and port from screen
-    if (client_init("127.0.0.1", 8888) == FAILURE) {
+    if (client_init("192.168.0.104", 8877) == FAILURE) {
         //TODO show error main_window
         gtk_main_quit();
     } else {

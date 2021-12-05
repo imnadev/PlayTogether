@@ -31,7 +31,7 @@ void server_action(char *action) {
         int position = vlc_get_seek_position() - 10;
         sprintf(message, "seek %d\r\n", position);
     } else {
-        sprintf(message, "%s/r/n", action);
+        sprintf(message, "%s\r\n", action);
     }
 
     for (i = 0; i < max_clients; i++) {

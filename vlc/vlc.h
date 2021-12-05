@@ -3,9 +3,9 @@
 
 #include <stdbool.h>
 
-void * vlc_connect();
+void vlc_connect();
 
-void vlc_send();
+void vlc_send(char *message);
 
 void vlc_action(char * action); //PLAY, PAUSE, SEEK_FORWARD, SEEK_BACKWARD
 

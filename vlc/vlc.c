@@ -23,7 +23,7 @@ char *vlc_read() {
     return vlc_buffer;
 }
 
-void *vlc_connect() {
+void vlc_connect() {
     if ((vlc_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("create");
     }
