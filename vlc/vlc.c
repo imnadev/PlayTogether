@@ -74,5 +74,5 @@ int vlc_get_seek_position() {
 }
 
 void vlc_stop() {
-    vlc_send("shutdown");
+    vlc_send("logout\r\n");
 }

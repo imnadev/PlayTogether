@@ -26,8 +26,8 @@ void main_window_show(int type) {
 }
 
 void main_window_on_play_clicked() {
-    vlc_action(PLAY);
     server_action(PLAY);
+    vlc_action(PLAY);
 }
 
 void main_window_on_sync_clicked() {
@@ -39,18 +39,18 @@ void main_window_on_sync_clicked() {
 }
 
 void main_window_on_pause_clicked() {
-    vlc_action(PAUSE);
     server_action(PAUSE);
+    vlc_action(PAUSE);
 }
 
 void main_window_on_seek_backward_clicked() {
-    vlc_action(SEEK_BACKWARD);
     server_action(SEEK_BACKWARD);
+    vlc_action(SEEK_BACKWARD);
 }
 
 void main_window_on_seek_forward_clicked() {
-    vlc_action(SEEK_FORWARD);
     server_action(SEEK_FORWARD);
+    vlc_action(SEEK_FORWARD);
 }
 
 void main_window_on_exit_clicked() {

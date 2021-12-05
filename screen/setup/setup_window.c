@@ -10,7 +10,7 @@ GtkWidget *setup_window;
 GtkWidget *entryAddress;
 GtkWidget *entryPort;
 char ip[16];
-int port = 8888;
+int port = 8877;
 
 void setup_window_show() {
     GtkBuilder *builder = gtk_builder_new_from_file("../screen/setup/setup_window.glade");
