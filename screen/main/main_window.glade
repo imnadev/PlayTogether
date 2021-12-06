@@ -40,7 +40,7 @@
   </object>
   <object class="GtkWindow" id="server_window">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Serving at 192.168.0.150:8080</property>
+    <property name="title" translatable="yes">Play Together</property>
     <property name="resizable">False</property>
     <property name="icon-name">template_app</property>
     <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
@@ -145,7 +145,7 @@
   </object>
   <object class="GtkWindow" id="client_window">
     <property name="can-focus">False</property>
-    <property name="title" translatable="yes">Connected to 192.168.0.150:8080</property>
+    <property name="title" translatable="yes">Play Together</property>
     <property name="resizable">False</property>
     <property name="icon-name">template_app</property>
     <child>
