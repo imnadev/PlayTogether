@@ -25,7 +25,7 @@ void client_sync() {
     }
 }
 
-_Noreturn void *listen_to_server(void *) {
+_Noreturn void *listen_to_server(void *a) {
     while (client_listening) {
         memset(client_buffer, 0, sizeof(client_buffer));
 

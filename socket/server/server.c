@@ -49,7 +49,7 @@ void server_action(char *action) {
     }
 }
 
-_Noreturn void *listen_to_connections(void *) {
+_Noreturn void *listen_to_connections(void *a) {
     while (listening) {
         FD_ZERO(&readfds);
         FD_SET(master_socket, &readfds);
