@@ -23,3 +23,20 @@ include_directories(${GTK3_INCLUDE_DIRS})
 link_directories(${GTK3_LIBRARY_DIRS})
 add_definitions(${GTK3_CFLAGS_OTHER})
 target_link_libraries(PlayTogether ${GTK3_LIBRARIES})
+
+#pkg_check_modules(GTK2 REQUIRED gtk+-2.0)
+#include_directories(${GTK2_INCLUDE_DIRS})
+#link_directories(${GTK2_LIBRARY_DIRS})
+#add_definitions(${GTK2_CFLAGS_OTHER})
+#target_link_libraries(PlayTogether ${GTK2_LIBRARIES})
+
+install(TARGETS PlayTogether
+        COMPONENT linapp
+        RUNTIME DESTINATION "/home/"
+        LIBRARY DESTINATION "/home/"
+        DESTINATION "/home/"
+        )
+
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "KK") #required
+INCLUDE(CPack)
