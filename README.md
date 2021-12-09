@@ -1,3 +1,4 @@
+Installing VLC
 > sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 
 > sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -6,12 +7,12 @@
 
 > vlc -I rc --rc-host=localhost:9988
 
-On another terminal
+Running VLC
 > telnet localhost 9988
 
 > enqueue /path/to/video.mp4
 
-On another terminal
+Installing and running PlayTogether
 > git clone https://github.com/imnadev/PlayTogether.git
 
 > cd main
